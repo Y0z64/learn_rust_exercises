@@ -54,21 +54,22 @@ until it is no longer inside it. When you make it static, it will always be aval
 //-------------TRAIT BOUND
 use std::fmt::Debug;
 
+#[allow(dead_code)]
 fn print_it( input: impl Debug + 'static) {
     println!("'static value passed in is {:?}", input);
 }
 //In here the function is asking for an input of Debug AND 'static
 //Its implementing Debug just like [derive(Debug)] would
 
-fn main() {
-    // i is owned and contains no references, thus it's 'static:
-    let i = 5;
-    print_it(i);
+// fn main() {
+//     // i is owned and contains no references, thus it's 'static:
+//     let i = 5;
+//     print_it(i);
 
-    // oops, &i only has the lifetime defined by the scope of
-    //main(), so it's not 'static;
-    //print_it(&i); //This will send an Error!
-}
+//     // oops, &i only has the lifetime defined by the scope of
+//     //main(), so it's not 'static;
+//     //print_it(&i); //This will send an Error!
+// }
 
-//So in the local scope i is 'static but the reference of &i is not
-//and so it will not be printed
+// //So in the local scope i is 'static but the reference of &i is not
+// //and so it will not be printed
